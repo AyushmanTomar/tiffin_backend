@@ -7,7 +7,7 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://tiffinindia.in"}})
+CORS(app, resources={r"/*": {"origins": "https://www.tiffinindia.in"}})
   # To allow cross-origin requests from React
 
 # MongoDB Atlas URI
