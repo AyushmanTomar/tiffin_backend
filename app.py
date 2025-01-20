@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from pymongo.mongo_client import MongoClient
 from dotenv import load_dotenv
 import os
+from datetime import datetime
 load_dotenv()
 
 app = Flask(__name__)
@@ -26,7 +27,14 @@ def submit_feedback():
 
     # Store data in MongoDB
     if feedback and rating and email and city:
-        collection.insert_one({'feedback': feedback, 'rating': rating, 'email': email, 'city': city})
+        current_time = datetime.utcnow()  # Get the current UTC time
+        collection.insert_one({
+            'feedback': feedback,
+            'rating': rating,
+            'email': email,
+            'city': city,
+            'time': current_time  # Add the current time field
+        })
         return jsonify({'message': 'Feedback Sent'}), 201
     else:
         return jsonify({'error': 'Invalid data'}), 400
